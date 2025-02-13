@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Dhadkan</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message for You🤍
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />  By Dhadkan
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>
+        Kuch log hamari zindagi me apne aap hi aa jate hai or hamari zindagi ko or bhi khubsurat bana dete hai 💖.
+        Jaise ki meri life me aaye aap or meri life ko or bhi beautiful bana diya. Har moment aapke sath special lagta hai jana ❤.
+        Jana shyd hamara ek hona likha hi tha kyuki pehle bhi jab me 4th me palwal aayi toh aapse mili or ab bhi aabse fir baat shuru hue 😍.
+        Krish is Valentine me aapke liye kuch special karna chahti hu. To ye ek book aapu ke liye jisme sirf words nhi meri feelings hai 💋.   </p>
+
+          <p>
+            Since we connected on
+            Instagram on February, 2022, ....
+          </p>
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Strangers to Something Special ❤️✨</h2>
+          <p>
+               Jana kitni ajib baat hai na ye ki kuch sal pehle tak to hum ek dusre ko jante tak nhi the or ab ek dusre ko dekh ke lagta 
+               hai jaise kabse ek dusre ko jante ho. 💕
+               Hamara ye strangers to lovers ka safar bahot hi cutu tha na mota.
+               Jaise hamari baat start hue pehle insta, insta se fir whatsapp, whatsapp se call pe baat😊.  
+               Starting starting me toh call pe kum baat hua karti thi or na khana sath me khate the na kuch lekin ab,ab ka toh aapko 
+               pata hi hai 🤭.
+               Or in sab ke bich kab aapse pyar hogya pata hi nhi chala jana or issi usme aapne mereko hopless karke merse 3 baar "I LOVE YOU"
+               bulva diya gandhu sa. Lekin yehi meri life ka best day tha 😚.
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p>
+           Motu ji aapki ankho me kuch toh jadu hai kyuki jab bhi unhe dekhti hu sari tension, sara stress ek dam duru bhag jata hai.
+           Aapki har ek choti se choi chiz bilkul perfect hai jana. Aapki smile , aapki eyes , aapke tedu medu se dath , aapki motu motu 
+           nak 😂 sbu chiz perfect hai 💋. Jana ye sab toh mazak hai lekin seriously aapu bahotu palu ho merese inna sala palu karte ho
+           itni care karte ho meri . Aapki toh jitni tarif ki jaye kum hai 🤭. Heheheheh ye thoda jyada hogya lekin seriously 
+           aapu bikku bikku bikku perfect ho mele chotu se motu se palu se mota 💋💋.
+          </p>
+        </div>
+        <div class="back">
+          <h2>The Strength Within You 💫✨</h2>
+          <p>
+            Jana ye sab chize toh aap me hai hi lekin isse bahot jyada badke bhi aap me bahot qualities hai jana.
+            Jaise ki aapki dedication ,  aapka hardwork , aapka passion.
+            Jana aapki yehi chiz aapko bahot aage tak leke jayegi dekh lena.
+            Or jana jaise aap har situation ko handle karte ho apne ghar ka bhi sab kuch itne pyaar se masti mazak me seh lete ho iske liye
+            bahot strength chaiye hoti hai ☹. I know ki abhi aapke ghar wale aapko itna support nhi kar pate lekin koi ni dekh lena aap 
+            apne dam pe hi sab kuch achieve kar loge or sabko aap pe bahot proud feel hoga lekin sabse jayada mereko hoga 🥺.
+            Motu ji me bhi hamesha aapko support karungi lekin sirf shi chizo me jisse aapko benefit ho.
+            Jana mereko pakka pata hai ki aap successful hoge or 1.5cr kamaoge or vo sare ke sare mereko diya karoge 🤭.
+            Haina Haina Doge na mereko 🤭😘
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖</h2>
+          <p>
+            Ab aata hai mere day ka best part raat ko 9 bje aapse call pe baat karna. Apne pure din ki bak bak aapko sunana , aapke din ke 
+            bare me jan na , masti karna , aapko pareshan karna sath me khana khana yehi mere day ki highlight hoti hai . Jab bhi aapke message 
+            ki notification aati hai na mere face pe hamesha smile aati hai. Mera kaisa bhi din ja rha ho lekin aapse baat karke sab bdia ho jata 
+            hai jana . Aapki baato se ek alag sa hi sukoon milta hai jaise aap har choti choti chiz mereko samjhate ho bahot palu lagta hai.
+
+          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Wish from the Heart 💫💖</h1>
+          <p>
+            Jana kabhi kabhi gandhu situation aati hai or mera bs ek hi chiz ka man karta hai "AAPSE MILNE KA" kyuki aapse milke sab acha 
+            acha lagta hai. Aapki awaj sunke me ho jati hu madhosh , aapka name hai KRISHHHH 🤭. Jana aapse milna aapke sath time spend karna
+            mujhe bahot acha lagta hai. Aapke sath cooking karna , ghumna , movie dekhna sab bestu lagta hai. Or ab toh ek new chiz bhi add 
+            hogyi hai hamari millu me guess karo kyaa hehehehehehehe obviously Reelu bana na sath me. MOTAAAAA MEET ME SOON NA ☹ I MISS YOU 
+            SOOOO MUCHHHHH.
+          </p>
+        </div>
+        <div class="back">
+          <h1>Always Here for You 💖✨</h1>
+          <p>
+            Jana kuch bhi ho jaye me hamesha aapke sath rahunga jana. Jitni bhi mushikile aa jaye me kabhi aapka sath nhi chodungi .
+            I know ki abhi hamare aage bahot lamba safar baki hai or usme bahot sare challenges bhi aayenge lekin mereko pura vishvas 
+            hai ki vo hume alag ni kar payenge. Mereko pata hai ki hum milke un sare challenges ko clear kar lenge jana jaise aaj tak karte
+            aaye hai. Krish mereko humpe or hamare relation pe pura vishvas. Dekh lena is relationship me no breakup only and only "MARRIAGE". 
+
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Beauty of You ✨💖</h2>
+          <p>
+          AAPKE LOOKS 🥵 </br>
+          Aapke looks ke bare me kya hi bolu bhyiiiiii KATAI ZEHER heheheheh 
+          Aap toh bhyi har chiz me hi sexy lagte ho "Black shirt" me "White shirt" me or obviously bina shirt ke toh sabse jyada 🤭
+          Aapki dressing sense seriously bahot bdia hai yr mtlb har chiz ko pair up karna. Or aap pe sab acha bhi lagta hai bhyi. 
+          Or aapki photos toh oyeee hoyee hoyeee 💋😘
+          </p>
+        </div>
+        <div class="back">
+          <h2>Absolutely Breathtaking ✨💖</h2>
+          <p>
+            You are absolutely breathtaking my love 💕✨. You look perfect in everything you wear. Your presence alone can brighten up 
+            any space. The way you carry yourself with such confidence leaves me in awe of you everytime. Whenever you dress up 
+            you look nothing short of a celebrity. And I am sure in the coming years you will infact become one of the most popular and 
+            most loved celebrity. And i will be there chearing for you like your biggest fan. 
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>Grateful for You🌹❤</h2>
+          <p>
+          Krish me aapke liye bahot grateful hu jana. Starting se hi mere liye aap bahot special rahe ho. Aap kabhi andaza bhi ni laga 
+          paoge ki me aapse kitna pyaar karti hu. Itne din aapke sath rehne me bahot maza aaya . Or me yehi chahti hu ki apne end time 
+          tak aapke hi sath rahu jana. Me bahot khush hu ki hamari baat start hue or vaha se hamari ek baho beautiful si journey bhi.
+          Kuch log ese hote hai jo dil pe chap chod jate hai or unme se ek ho aap 🥺💋   
+          </p>
+        </div>
+        <div class="back">
+          <h2>Will You Be Mine? ❤️✨</h2>
+          <p>
+            Jabse hamari baat start hue hai na jana jabse aap hamesha mere mind pe rehte ho 😍
+            Everything about you feels so special to me love. You make my world brighter, my days happier and my life even more beautiful
+            🥺. Mereko nhi pata ki hamare future me kya likha hai lekin me yehi hope karungi ki future me bhi mereko aapka sath mile ☹.
+            At the end my last and final question to you Krish please mana mat karna 🥺. </br>
+            Will you be mine Mr Krish Verma? 💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./4.png" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>Cutest Baby</h3>
+          <p>
+            By your one and ony Dhadkan 💕<br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
